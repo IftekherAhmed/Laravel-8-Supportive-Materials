@@ -1,0 +1,40 @@
+
+
+Install LiveWire:-
+================================
+	composer require livewire/livewire
+
+
+Make External LiveWire:-
+================================
+	php artisan make:livewire Post
+	// Post will the name of LiveWire
+
+
+Make Internal LiveWire:-
+================================
+	php artisan make:livewire Post --inline
+	// Post will the name of LiveWire
+	
+	
+
+Include livewire stylesheets:-
+================================
+	@livewireStyles
+	//It must be placed above </head> this tag
+
+
+Include livewire Javascripts:-
+================================
+	@livewireScripts
+	//It must be placed above </body> this tag
+
+
+Include livewire Component:-
+================================
+	@livewire('home')
+
+
+
+
+

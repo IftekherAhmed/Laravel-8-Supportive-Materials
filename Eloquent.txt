@@ -1,0 +1,46 @@
+
+Retrive
+================================
+$data =  new students;
+$data =  $students::all();
+$data =  $students::whereBetween('id', [10,20])->orderBy('id', 'DESC')->get();
+$data =  $students::where('id', 10)->get();
+$data =  $students::skip(10)->take(5)->get();
+$data =  $students::paginate(5);
+
+
+Insert
+================================
+$flight = Flight;
+$flight->name = $request->name;
+$flight->save();
+
+
+
+Single View
+================================
+$flight = Flight::where('number', 12)->get()->first();
+
+
+Update
+================================
+$flight = Flight::where('active', 1)
+->where('destination', 'San Diego')
+->update(['delayed' => 1]);
+
+
+Delete
+================================
+use App\Models\Flight;
+$flight = Flight::find(1);
+$flight->delete();
+
+
+WhereBetween
+================================
+$students = User::whereBetween('created_at', [$startDate, $endDate])->get();
+
+
+Order 
+================================
+$results = Project::orderBy("name", "Desc")->get();

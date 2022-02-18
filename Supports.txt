@@ -1,0 +1,77 @@
+
+
+Route Page:-
+================================
+	Add Controller Name
+	================================
+	It is used under Route's (
+	use Illuminate\Support\Facades\Route;
+	) these line.
+	use App\Http\Controllers\HomeController;
+
+
+
+Controller Page:-
+================================
+	It is used under Controllers' (
+	namespace App\Http\Controllers;
+	use Illuminate\Http\Request;
+	) these lines.
+	================================
+	HTTP Client
+	================================
+	use Illuminate\Support\Facades\Http;
+
+
+	================================
+	String
+	================================
+	use Illuminate\Support\Str;
+
+
+	================================
+	Database
+	================================
+	use Illuminate\Support\Facades\DB;
+
+
+	================================
+	App
+	================================
+	use Illuminate\Support\Facades\App;
+
+
+	================================
+	Mail
+	================================
+	use Illuminate\Support\Facades\Mail;
+
+----------------------------------------------
+
+
+
+================================
+Factories
+================================
+	use Illuminate\Database\Eloquent\Factories\Factory;
+
+----------------------------------------------
+
+
+
+================================
+Seeder
+================================
+	use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+
+================================
+Faker
+================================
+	use Faker\Factory as faker;
+
+
+
+
+

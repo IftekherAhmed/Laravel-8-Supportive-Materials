@@ -1,0 +1,31 @@
+
+
+There are Two Table like 'category', 'post'
+
+Category Table
+====================
+id, title, created_at
+
+Post Table
+====================
+id, title, description, category_id, created_at
+
+
+
+
+
+
+Category Model
+====================
+public function post() 
+{
+	return $this->hasOne('App\Models\post');
+}
+
+Post Model
+====================
+public function category() 
+{
+	return $this->belongsTo('App\Models\category');
+}
+

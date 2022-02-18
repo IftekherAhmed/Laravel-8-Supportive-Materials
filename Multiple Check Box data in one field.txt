@@ -1,0 +1,27 @@
+<form action="store" method="post">
+
+    <input type="checkbox" name="favorite[]" id="south" value="south">
+    <label for="south">South</label>
+
+    <input type="checkbox" name="favorite[]" id="north" value="north">
+    <label for="north">North</label>
+
+    <input type="checkbox" name="favorite[]" id="east" value="east">
+    <label for="east">East</label>
+
+    <label for=""></label>
+    <input type="submit" name="submit" value="Submit">
+</form>
+
+
+Controller//
+public function store(Request $request)
+{
+    $request->merge([ 
+        'favorite' => implode(',', (array) $request->get('favorite'))
+    ]);
+
+    laravel::create($request->all());
+
+    return "data saved";
+}

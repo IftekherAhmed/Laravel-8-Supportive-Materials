@@ -1,0 +1,26 @@
+<?php
+  
+namespace App\Http\Controllers;
+  
+use Illuminate\Support\Facades\Http;
+use App\Models\Item;
+use Carbon\Carbon;
+  
+class ITSController extends Controller
+{
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function index()
+    {
+        $items = Item::select("*")
+                ->whereBetween('created_at', 
+                        [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]
+                    )
+                ->get();
+  
+        dd($items);
+    }
+}

@@ -1,0 +1,162 @@
+Laravel 8 User Authentication with multiple role
+
+https://github.com/laravel/ui
+
+Command ////
+composer require laravel/ui
+php artisan ui bootstrap --auth (It will create pages with bootstrap)
+php artisan ui:auth (It will create pages with out bootstrap)
+npm install && npm run dev
+php artisan make:middleware Is_Admin
+
+
+User Migration ////
+database/migrations/create_users_table.php
+public function up()
+{
+	Schema::create('users', function (Blueprint $table) {
+		$table->id();
+		$table->string('name');
+		$table->string('email');
+		$table->timestamp('email_verified_at')->nullable();
+		//$table->boolean('is_admin')->nullable();		
+		$table->boolean('is_admin')->default(0);
+		$table->string('password');
+		$table->rememberToken();
+		$table->timestamps();
+	});
+}
+Command ////
+php artisan migrate
+
+
+
+
+User Model ////
+app/Models/User.php
+protected $fillable = [
+	'name', 'email', 'password', 'is_admin'
+];
+
+
+
+
+Is_Admin Middleware ////
+app/Http/middleware/Is_Admin.php ////
+public function handle($request, Closure $next)
+{
+	if(auth()->user()->is_admin == 1){
+		return $next($request);
+	}
+
+	return redirect('home')->with('error',"You don't have admin access.");
+}
+
+
+
+Kernel ////
+app/Http/Kernel.php
+protected $routeMiddleware = [
+	----------------------------------
+	----------------------------------
+	----------------------------------
+	----------------------------------
+	----------------------------------
+	----------------------------------,
+    'is_admin' => \App\Http\Middleware\Is_Admin::class,
+];
+
+
+
+Route ////
+routes/web.php
+Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+
+
+
+HomeController ////
+app/Http/Controllers/HomeController.php
+public function adminHome()
+{
+	return view('adminHome');
+}
+
+
+
+Local User View ///
+resources/views/home.blade.php
+@extends('layouts.app')   
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+                <div class="card-body">
+                    You are normal user.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+
+Admin View ///
+resources/views/adminHome.blade.php
+@extends('layouts.app')   
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+                <div class="card-body">
+                    You are Admin.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+
+
+
+
+Login Controller ///
+app/Http/Controllers/Auth/LoginController.php
+use Illuminate\Http\Request; (We need to use it to support the request variable)
+public function login(Request $request)
+{   
+	$input = $request->all();
+
+	$this->validate($request, [
+		'email' => 'required|email',
+		'password' => 'required',
+	]);
+
+	if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+	{
+		if (auth()->user()->is_admin == 1) {
+			return redirect()->route('admin.home');
+		}else{
+			return redirect()->route('home');
+		}
+	}else{
+		return redirect()->route('login')
+			->with('error','Email-Address And Password Are Wrong.');
+	}  
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+<?php
+  
+namespace App\Http\Controllers;
+  
+use Illuminate\Support\Facades\Http;
+use App\Models\Item;
+use Carbon\Carbon;
+  
+class ITSController extends Controller
+{
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function index()
+    {
+        $calls = \DB::table('calls') 
+			->where('owned_by_id', $report->id) 
+			->whereBetween('created_at', [Carbon::now()->subWeek()->format("Y-m-d H:i:s"), Carbon::now()])
+			->get();
+		$report->callsCount = $calls->count();
+  
+        dd($calls);
+    }
+}
