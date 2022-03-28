@@ -1,0 +1,98 @@
+Spatie Role And Permission
+https://spatie.be/docs/laravel-permission/v5/installation-laravel
+
+
+Command ////
+composer require laravel/ui
+php artisan ui bootstrap --auth (It will create pages with bootstrap)
+php artisan ui:auth (It will create pages with out bootstrap)
+npm install && npm run dev
+composer require spatie/laravel-permission
+
+
+Add PermissionServiceProvider ////
+config/app.php
+'providers' => [
+	Spatie\Permission\PermissionServiceProvider::class,
+],
+
+
+
+Command ////
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan migrate
+
+
+Change User Models ////
+app/Models/User.php
+Insert at the top: use Spatie\Permission\Traits\HasRoles;
+use HasRoles;
+
+
+Change Kernel.php file ////
+app/Http/Kernel.php
+protected $routeMiddleware = [
+    ....
+    'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+]
+
+
+
+
+Add in any controller and run the route controller to insert some roles and permissions ///
+//Role Create
+Role::create(['name' => 'Writer']);
+Role::create(['name' => 'Editor']);
+Role::create(['name' => 'Admin']);
+Role::create(['name' => 'User']);
+
+//Permission Create
+Permission::create(['name' => 'Write_Post']);
+Permission::create(['name' => 'Edit_Post']);
+Permission::create(['name' => 'Delete_Post']);
+Permission::create(['name' => 'View_Post']);
+
+// Give Permission to Roles
+$role = Role::findById(1);
+$permission = Permission::findById(1);
+$role->givePermissionTo($permission);
+
+// Assign Role to User
+//$role = Role::findById(4);
+// auth()->user()->assignRole($role);
+// $user = User::where('id', 4) -> first();
+// $user->assignRole($role);
+
+// Give Direct Permission to user
+//$permission = Permission::findById(1);
+//auth()->user()->givePermissionTo($permission);
+
+// Printing Permission
+// dd(auth()->user()->permissions);
+
+// Removing User Permission
+// auth()->user()->revokePermissionTo('Edit_Post');
+
+
+Modify your View Blade file as you want ////
+@can('Delete_Post')
+	<form action="{{ route('post.destroy', $value->id) }}" method="POST">
+		@csrf
+		@method('DELETE')
+		<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+	</form>
+@endcan
+
+
+And Finally Protect your url with role or permission middleware ////
+Route::controller(PostController::class)->name('post.')->group(function () {
+    Route::get('post', 'index')->name('index');
+    Route::get('post/create', 'create')->name('create')->middleware('permission:Write_Post');
+    Route::post('post', 'store')->name('store')->middleware('permission:Write_Post');
+    Route::get('post/{post}', 'show')->name('show')->middleware('permission:View_Post');
+    Route::get('post/{post}/edit', 'edit')->name('edit')->middleware('permission:Edit_Post');
+    Route::put('post/{post}', 'update')->name('update')->middleware('permission:Edit_Post');
+    Route::delete('post/{post}', 'destroy')->name('destroy')->middleware('permission:Delete_Post');
+});

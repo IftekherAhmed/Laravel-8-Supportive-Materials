@@ -1,0 +1,15 @@
+Laravel 8 User Authentication
+
+https://github.com/laravel/ui
+
+Command ////
+composer require laravel/ui
+php artisan ui bootstrap --auth (It will create pages with bootstrap)
+php artisan ui:auth (It will create pages with out bootstrap)
+npm install && npm run dev
+
+
+
+
+
+
