@@ -1,0 +1,15 @@
+//Composer Dependencies
+You should update the following dependencies in your application's composer.json file:
+	laravel/framework to ^9.0
+	nunomaduro/collision to ^6.1
+In addition, please replace facade/ignition with "spatie/laravel-ignition": "^1.0" in your application's composer.json file.
+
+
+//Command
+composer update
+composer install 
+mv .env.example .env 
+php artisan cache:clear 
+composer dump-autoload 
+php artisan key:generate
+php artisan config:cache
