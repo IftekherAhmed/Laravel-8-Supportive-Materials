@@ -8,6 +8,14 @@ use Database\Seeders\post;
 use Database\Seeders\comment;
 
 
+public function run()
+{
+	$this->call(post::class);
+	$this->call(comment::class);
+}
+
+
+
 
 //Change seeder file
 *Insert these at the top of the starting class
