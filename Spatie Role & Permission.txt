@@ -42,31 +42,68 @@ protected $routeMiddleware = [
 
 
 Add in any controller and run the route controller to insert some roles and permissions ///
-//Role Create
-Role::create(['name' => 'Writer']);
-Role::create(['name' => 'Editor']);
-Role::create(['name' => 'Admin']);
-Role::create(['name' => 'User']);
 
-//Permission Create
-Permission::create(['name' => 'Write_Post']);
-Permission::create(['name' => 'Edit_Post']);
-Permission::create(['name' => 'Delete_Post']);
-Permission::create(['name' => 'View_Post']);
+/******************/
+/******Spatie******/
+/******************/
+// Role Create
+// Role::create(['name' => 'Writer']);
+// Role::create(['name' => 'Editor']);
+// Role::create(['name' => 'Admin']);
+// Role::create(['name' => 'User']);
 
-// Give Permission to Roles
-$role = Role::findById(1);
-$permission = Permission::findById(1);
-$role->givePermissionTo($permission);
+// Permission Create
+// Permission::create(['name' => 'Write_Post']);
+// Permission::create(['name' => 'Edit_Post']);
+// Permission::create(['name' => 'Delete_Post']);
+// Permission::create(['name' => 'View_Post']);
+
+// Get all roles
+// $writer_role    = Role::findById(1);
+// $editor_role    = Role::findById(2);
+// $admin_role     = Role::findById(3);
+// $user_role      = Role::findById(4);
+
+// Get all permissions
+// $write_permission   = Permission::findById(1);
+// $edit_permission    = Permission::findById(2);
+// $delete_permission  = Permission::findById(3);
+// $view_permission    = Permission::findById(4);
+
+// Give Permission to Admin Role
+// $admin_role->givePermissionTo([$write_permission, $edit_permission, $delete_permission, $view_permission]);
+
+// Give Permission to Writer Role
+// $writer_role->givePermissionTo([$write_permission, $view_permission]);
+
+// Give Permission to Editor Role
+// $editor_role->givePermissionTo([$edit_permission, $view_permission]);
+
+// Give Permission to User Role
+// $user_role->givePermissionTo($view_permission);
+
+
+// Get all roles
+// $writer_role    = Role::findById(1);
+// $editor_role    = Role::findById(2);
+// $admin_role     = Role::findById(3);
+// $user_role      = Role::findById(4);
+
+// Find User to assign role
+// $admin  = User::where('id', 1) -> first();
+// $writer = User::where('id', 2) -> first();
+// $editor = User::where('id', 4) -> first();
+// $user   = User::where('id', 3) -> first();
 
 // Assign Role to User
-//$role = Role::findById(4);
-// auth()->user()->assignRole($role);
-// $user = User::where('id', 4) -> first();
-// $user->assignRole($role);
+// $admin->assignRole($admin_role);
+// $writer->assignRole($writer_role);
+// $editor->assignRole($editor_role);
+// $user->assignRole($user_role);
+
 
 // Give Direct Permission to user
-//$permission = Permission::findById(1);
+// $permission = Permission::findById(1);
 //auth()->user()->givePermissionTo($permission);
 
 // Printing Permission
@@ -74,6 +111,10 @@ $role->givePermissionTo($permission);
 
 // Removing User Permission
 // auth()->user()->revokePermissionTo('Edit_Post');
+
+/**********************/
+/******End Spatie******/
+/**********************/
 
 
 Modify your View Blade file as you want ////
