@@ -1,0 +1,86 @@
+
+
+//Command
+composer create-project laravel/laravel livewire-SPA
+composer require livewire/livewire
+php artisan make:livewire Home
+php artisan make:livewire About
+php artisan make:livewire Service
+
+
+=>File location: resources/views/
+#layout.blade.php
+<html>
+<head>
+    <title>Default Title</title>
+    @livewireStyles
+</head>
+<body>
+    
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/service">Post</a>
+
+    {{ $slot }}
+    
+    @livewireScripts
+</body>
+</html>
+
+
+=>File location: resources/views/livewire/
+#home.blade.php
+<div>
+    <h3>Home Page</h3>
+</div>
+
+#about.blade.php
+<div>
+    <h3>About Page</h3>
+</div>
+
+#service.blade.php
+<div>
+    <h3>Service Page</h3>
+</div>
+
+
+SPA Documentation link:
+https://github.com/turbolinks/turbolinks
+
+
+=>File location: resources/js/
+#app.js
+%Add these below two lines%
+var Turbolinks = require("turbolinks")
+Turbolinks.start()
+
+
+//Command
+npm install --save turbolinks
+npm install
+npm run dev
+
+
+=>File location: resources/views/
+#layout.blade.php
+Add app.js under: @livewireScripts
+<script src="{{ asset('js/app.js') }}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
