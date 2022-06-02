@@ -1,0 +1,60 @@
+SEO Packages
+================================
+https://github.com/davmixcool/laravel-meta-manager
+https://github.com/artesaos/seotools
+https://github.com/orzcc/autometa
+https://github.com/mad-web/laravel-seoable
+
+
+E-Commerce
+================================
+Cart: https://github.com/bumbummen99/LaravelShoppingcart
+Cart: https://github.com/Crinsane/LaravelShoppingcart
+Payments infrastructure: https://stripe.com/
+
+
+Auth
+================================
+User verification and validate the e-mail: https://github.com/jrean/laravel-user-verification
+Social login: https://github.com/laravel/socialite
+
+
+Captcha
+================================
+https://github.com/anhskohbo/no-captcha
+
+
+Migration
+================================
+https://github.com/Xethron/migrations-generator
+
+
+Captcha
+================================
+https://github.com/rashidlaasri/LaravelInstaller
+
+
+Role & Permission
+================================
+Spatie: https://spatie.be/docs/laravel-permission/v5/introduction
+Spatie: https://github.com/spatie/laravel-permission
+
+
+Supporting Text
+================================
+https://github.com/LaravelDaily/laravel-tips
+
+
+Laravel Mix
+================================
+https://github.com/laravel-mix/laravel-mix/
+
+
+Debugbar
+================================
+https://github.com/barryvdh/laravel-debugbar
+
+
+Google Analytics
+================================
+https://github.com/spatie/laravel-analytics
