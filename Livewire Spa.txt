@@ -52,8 +52,15 @@ https://github.com/turbolinks/turbolinks
 =>File location: resources/js/
 #app.js
 %Add these below two lines%
+%This is for Turbolinks(SPA)%
 var Turbolinks = require("turbolinks")
 Turbolinks.start()
+
+%This is for livewire component load after loading Turbolinks%
+%Like: we have category livewire component and this component has many filter or sorting options(search, category_type, status, etc) those function would not be worked without below's code%
+document.addEventListener("turbolinks:load", function(event) {
+    window.livewire.restart();
+});
 
 
 //Command
