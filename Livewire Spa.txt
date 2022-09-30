@@ -6,7 +6,7 @@ composer require livewire/livewire
 php artisan make:livewire Home
 php artisan make:livewire About
 php artisan make:livewire Service
-
+=====================================================================
 
 =>File location: resources/views/
 #layout.blade.php
@@ -19,15 +19,42 @@ php artisan make:livewire Service
     
     <a href="/">Home</a>
     <a href="/about">About</a>
-    <a href="/service">Post</a>
+    <a href="/service">Service</a>
 
-    {{ $slot }}
+    @yeald('main_content')
     
     @livewireScripts
     <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false" data-turbo-eval="false"></script>	
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
+=====================================================================
 
+
+=>File location: resources/views/
+#make two blade files
+1: about.blade.php
+@extends('layout')
+@section('main_content')
+@livewire('about')
+@endsection
+-------------------
+2: service.blade.php
+@extends('layout')
+@section('main_content')
+@livewire('service')
+@endsection
+=====================================================================
+
+=>File location: routes/web.php
+#Add two routes
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/service', function () {
+    return view('service');
+});
+=====================================================================
 
 =>File location: resources/views/livewire/
 #home.blade.php
@@ -44,10 +71,12 @@ php artisan make:livewire Service
 <div>
     <h3>Service Page</h3>
 </div>
+=====================================================================
 
 
 SPA Documentation link:
 https://github.com/turbolinks/turbolinks
+=====================================================================
 
 
 =>File location: resources/js/
@@ -62,19 +91,12 @@ Turbolinks.start()
 document.addEventListener("turbolinks:load", function(event) {
     window.livewire.restart();
 });
-
+=====================================================================
 
 //Command
 npm install --save turbolinks
 npm install
 npm run dev
-
-
-=>File location: resources/views/
-#layout.blade.php
-Add app.js under: @livewireScripts
-<script src="{{ asset('js/app.js') }}"></script>
-
 
 
 
