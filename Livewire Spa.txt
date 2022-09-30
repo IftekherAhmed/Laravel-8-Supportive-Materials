@@ -32,14 +32,20 @@ php artisan make:livewire Service
 
 
 =>File location: resources/views/
-#make two blade files
-1: about.blade.php
+#make three blade files
+1: home.blade.php
+@extends('layout')
+@section('main_content')
+@livewire('home')
+@endsection
+-------------------
+2: about.blade.php
 @extends('layout')
 @section('main_content')
 @livewire('about')
 @endsection
 -------------------
-2: service.blade.php
+3: service.blade.php
 @extends('layout')
 @section('main_content')
 @livewire('service')
@@ -47,6 +53,10 @@ php artisan make:livewire Service
 =====================================================================
 
 =>File location: routes/web.php
+#Modify base route
+Route::get('/', function () {
+    return view('home');
+});
 #Add two routes
 Route::get('/about', function () {
     return view('about');
